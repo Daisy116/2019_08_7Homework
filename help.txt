@@ -1,0 +1,25 @@
+https://www.base64-image.de/   圖片轉base64編碼!!!
+
+
+
+css相關的 :
+https://www.w3.org/Style/Examples/007/center.zh_HK.html   置中方法
+https://www.cnblogs.com/jingwhale/p/4599327.html   圖文在同一行
+
+
+html相關的 :
+https://www.wibibi.com/info.php?tid=240    html超連結
+http://cythilya.blogspot.com/2015/04/bootstrap-grid-system.html    bootstrap網格!!!
+
+
+
+
+
+
+
+還沒做
+https://www.wibibi.com/info.php?tid=381
+要看的作業 :
+https://learnku.com/docs/psr/psr-2-coding-style-guide/1606
+Google search : mvc、api 模式
+https://laravel.com/
