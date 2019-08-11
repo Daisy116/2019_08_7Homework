@@ -28,9 +28,6 @@ if (isset($_POST["btnOK"]))
         $result = mysqli_query($link, $commandText);
         while ($row = mysqli_fetch_assoc($result))   
         {
-            // echo gettype($sUserPwd);
-            // echo gettype($row['password']);
-
             if($row['password'] == $sUserPwd)
             {
                 // echo "帳號：{$row['member_id']}<br>";
@@ -47,6 +44,13 @@ if (isset($_POST["btnOK"]))
             header("Location: index.php");            
         }
 	}
+}
+
+if (isset($_POST["btnOK2"])){
+    $sUName = $_POST["txtUName"];
+    $sUPwd = $_POST["txtPword"];
+    $commandText2 = "INSERT INTO member_account (member_id,password) VALUES('$sUName','$sUPwd');";
+    $result2 = mysqli_query($link, $commandText2);
 }
 ?>
 
@@ -74,6 +78,27 @@ if (isset($_POST["btnOK"]))
       <td colspan="2" align="center" bgcolor="#CCCCCC"><input type="submit" name="btnOK" id="btnOK" value="登入" />
       <input type="reset" name="btnReset" id="btnReset" value="重設" />
       <input type="submit" name="btnHome" id="btnHome" value="回首頁" />
+      </td>
+    </tr>
+  </table>
+
+  <document class="write"><br><hr><br></document>
+
+  <table width="300" border="0" align="center" cellpadding="5" cellspacing="0" bgcolor="#F2F2F2">
+    <tr>
+      <td colspan="2" align="center" bgcolor="#CCCCCC"><font color="#FFFFFF">申請加入會員</font></td>
+    </tr>
+    <tr>
+      <td width="80" align="center" valign="baseline">請輸入帳號</td>
+      <td valign="baseline"><input type="text" name="txtUName" id="txtUName" /></td>
+    </tr>
+    <tr>
+      <td width="80" align="center" valign="baseline">請輸入密碼</td>
+      <td valign="baseline"><input type="password" name="txtPword" id="txtPword" /></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center" bgcolor="#CCCCCC"><input type="submit" name="btnOK2" id="btnOK2" value="我要申請" />
+      <input type="reset" name="btnReset" id="btnReset" value="重設" />
       </td>
     </tr>
   </table>

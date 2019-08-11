@@ -11,17 +11,22 @@ $link = @mysqli_connect("localhost", "root", "") or die(mysqli_connect_error());
 $result = mysqli_query($link, "set names utf8");
 mysqli_select_db($link, "shopping_cart");
 
-$commandText = "";
-$commandText2 = "";
 if (isset($_GET['value'])){    
     $n1 = $_GET['value'];
     $commandText = "INSERT INTO transaction (member_id,p_id,howmany) VALUES('$sUserName','1','$n1');";
+    $result = mysqli_query($link, $commandText); 
 }  
-// if (isset($_GET['value2'])){
-//     $n2 = $_GET['value2'];
-//     $commandText2 = $commandText . "INSERT INTO transaction (member_id,p_id,howmany) VALUES('$sUserName','2',$n2);";
-// }  
-$result = mysqli_query($link, $commandText); 
+if (isset($_GET['value2'])){
+    $n2 = $_GET['value2'];
+    $commandText2 = "INSERT INTO transaction (member_id,p_id,howmany) VALUES('$sUserName','2',$n2);";
+    $result = mysqli_query($link, $commandText2); 
+}  
+if (isset($_GET['value3'])){
+    $n3 = $_GET['value3'];
+    $commandText3 = "INSERT INTO transaction (member_id,p_id,howmany) VALUES('$sUserName','3',$n3);";
+    $result = mysqli_query($link, $commandText3); 
+} 
+
 ?>
 
 <script>
@@ -33,10 +38,7 @@ function Buyx3(){
     test.innerText += n1;
     test.innerText += "  " + n2;
     test.innerText += "  " + n3;
-    location.href="index.php?value=" + n1;
-    // + "?value2=" + n2
-    // let ss = "";
-    // document.write(ss);
+    location.href="index.php?value=" + n1 + "&value2=" + n2 + "&value3=" + n3;
 }
 </script>
 

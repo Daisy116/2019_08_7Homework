@@ -3,8 +3,9 @@ if (!isset($_COOKIE["userName"]))
 {
 	setcookie("lastPage", "secret.php");
 	header("Location: login.php");
-	exit();
-	
+	exit();	
+}else{
+    $sUserName = $_COOKIE["userName"];
 }
 ?>
 
@@ -21,13 +22,24 @@ if (!isset($_COOKIE["userName"]))
     <td align="center" bgcolor="#CCCCCC"><font color="#FFFFFF">已加入購物車的有 : </font></td>
   </tr>
   <tr>
-    <td align="center" valign="baseline">This page for member only.</td>
-  </tr>
-  <tr>
-    <td align="center" bgcolor="#CCCCCC"><a href="index.php">回首頁</a></td>
+    <td align="center" valign="baseline"><a href="index.php">回首頁</a></td>
   </tr>
 </table>
+<?php $link = @mysqli_connect("localhost", "root", "") or die(mysqli_connect_error());
+        $result = mysqli_query($link, "set names utf8");
+        mysqli_select_db($link, "shopping_cart"); 
+        $commandText = "SELECT p_name AS '商品名稱',howmany AS '購買數量'
+        FROM `transaction` LEFT JOIN `selling_product` ON `transaction`.`p_id` = selling_product.p_id
+        WHERE member_id = '$sUserName'";
+        $result = mysqli_query($link, $commandText);
 
+        while ($row = mysqli_fetch_assoc($result))
+        {
+            echo "商品：{$row['商品名稱']}<br>";
+            echo "數量：{$row['購買數量']}<br>";
+            echo "<HR>";
+        }
+?>
 
 </body>
 </html>
