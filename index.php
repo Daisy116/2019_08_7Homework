@@ -1,32 +1,36 @@
 <?php 
-if (isset($_COOKIE["userName"]))
-  $sUserName = $_COOKIE["userName"];
-else 
-  $sUserName = "Guest";
-
-
 header("content-type:text/html; charset=utf-8");
 
 $link = @mysqli_connect("localhost", "root", "") or die(mysqli_connect_error());
 $result = mysqli_query($link, "set names utf8");
 mysqli_select_db($link, "shopping_cart");
 
-if (isset($_GET['value'])){    
-    $n1 = $_GET['value'];
-    $commandText = "INSERT INTO transaction (member_id,p_id,howmany) VALUES('$sUserName','1','$n1');";
-    $result = mysqli_query($link, $commandText); 
-}  
-if (isset($_GET['value2'])){
-    $n2 = $_GET['value2'];
-    $commandText2 = "INSERT INTO transaction (member_id,p_id,howmany) VALUES('$sUserName','2',$n2);";
-    $result = mysqli_query($link, $commandText2); 
-}  
-if (isset($_GET['value3'])){
-    $n3 = $_GET['value3'];
-    $commandText3 = "INSERT INTO transaction (member_id,p_id,howmany) VALUES('$sUserName','3',$n3);";
-    $result = mysqli_query($link, $commandText3); 
-} 
+if (isset($_COOKIE["userName"])){
+    $sUserName = $_COOKIE["userName"];
 
+    if (isset($_GET['value'])){    
+        $n1 = $_GET['value'];
+        $commandText = "INSERT INTO transaction (member_id,p_id,howmany) VALUES('$sUserName','1','$n1');";
+        $result = mysqli_query($link, $commandText); 
+    }  
+    if (isset($_GET['value2'])){
+        $n2 = $_GET['value2'];
+        $commandText2 = "INSERT INTO transaction (member_id,p_id,howmany) VALUES('$sUserName','2',$n2);";
+        $result = mysqli_query($link, $commandText2); 
+    }  
+    if (isset($_GET['value3'])){
+        $n3 = $_GET['value3'];
+        $commandText3 = "INSERT INTO transaction (member_id,p_id,howmany) VALUES('$sUserName','3',$n3);";
+        $result = mysqli_query($link, $commandText3); 
+    } 
+
+}else{
+    $sUserName = "Guest"; 
+    if (isset($_GET['value']) || isset($_GET['value2']) || isset($_GET['value3'])){
+        echo "<script> alert('尚未登入'); </script>";
+        header("Location: login.php");
+    }
+}
 ?>
 
 <script>
@@ -39,6 +43,8 @@ function Buyx3(){
     test.innerText += "  " + n2;
     test.innerText += "  " + n3;
     location.href="index.php?value=" + n1 + "&value2=" + n2 + "&value3=" + n3;
+
+
 }
 </script>
 
